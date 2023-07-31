@@ -1,5 +1,6 @@
 {
     "last_language": "english",
+    "words_per_page": 50,
     "language_specific": {
         "english": {
             "language_codes": ["EN", "eng", "en", "english"],
@@ -12,10 +13,6 @@
                 "help": {
                     "keys": ["h", "help"],
                     "help": "prints help message"
-                },
-                "restart": {
-                    "keys": ["r", "restart"],
-                    "help": "Restarts the game"
                 },
                 "add": {
                     "keys": ["a", "add"],
@@ -32,6 +29,10 @@
                 "unmark": {
                     "keys": ["um", "unmark"],
                     "help": "Unmarks marked words"
+                },
+                "page": {
+                    "keys": ["p", "page"],
+                    "help": "p+ p- Flip pages of the dicitonary"
                 }
             }
         },
