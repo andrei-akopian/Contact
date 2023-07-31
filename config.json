@@ -1,5 +1,5 @@
 {
-    "last_language": "german",
+    "last_language": "english",
     "language_specific": {
         "english": {
             "language_codes": ["EN", "eng", "en", "english"],
@@ -13,18 +13,35 @@
                     "keys": ["h", "help"],
                     "help": "prints help message"
                 },
-                "restart": ["r", "restart"],
-                "add": ["a", "add"],
-                "undo": ["u", "undo"],
-                "mark": ["m", "mark"],
-                "unmark": ["um", "unmark"]
+                "restart": {
+                    "keys": ["r", "restart"],
+                    "help": "Restarts the game"
+                },
+                "add": {
+                    "keys": ["a", "add"],
+                    "help": "adds the next letter"
+                },
+                "undo": {
+                    "keys": ["u", "undo"],
+                    "help": "Undoes your last action"
+                },
+                "mark": {
+                    "keys": ["m", "mark"],
+                    "help": "Marks words as used"
+                },
+                "unmark": {
+                    "keys": ["um", "unmark"],
+                    "help": "Unmarks marked words"
+                }
             }
         },
         "german": {
-            "language_codes": ["DE", "de", "ger", "deu", "german"]
+            "language_codes": ["DE", "de", "ger", "deu", "german"],
+            "dictionaries": ["german.json"]
         },
         "russian": {
-            "language_codes": ["RU", "ru", "rus", "russian"]
+            "language_codes": ["RU", "ru", "rus", "russian"],
+            "dictionaries": ["russian.json"]
         }
     }
 }

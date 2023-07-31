@@ -4,6 +4,8 @@ This is a script for the "contact" game. (Not as the gameboard but as a player/a
 - [Game Rules](#game-rules)
 - [Usage](#usage)
 - [Custom Languages](#custom-languages)
+  - [Create 1 or more dictionaries](#create-1-or-more-dictionaries)
+  - [Add the dictionary (and language) into config.json](#add-the-dictionary-and-language-into-configjson)
 - [Citations](#citations)
 - [TODOs](#todos)
 
@@ -44,18 +46,20 @@ Additional rules:
 
 # Custom Languages
 
-If you want to add your own language, here is what you need to do:
+If you want to add your own language, here is what you need to do (2 things):
+
+## Create 1 or more dictionaries
 
 In the dictionaries folder, create a JSON file with the name of the language and fill it like this:
 
-```json
-//language.json
+```nim
+# language.json
 {
-  "a":[ //words starting with "a"
-    [0,"apple",["a red fruit","a tech company"]], // [number,word,[definitions]]
+  "a":[ # words starting with "a"
+    [0,"apple",["a red fruit","a tech company"]], # [number,word,[definixtions]]
     [2,"area",["a region"]]
   ],
-  "b":[ //words starting with "b"
+  "b":[ #words starting with "b"
     [1,"boat",["a small ship"]]
   ]
 }
@@ -67,6 +71,14 @@ The words are categorized based on the first letter to avoid doing the sort the 
 
 More instructions in `processor.ipynb`
 
+## Add the dictionary (and language) into config.json
+
+In order to make your language selectable, you will have to put it into configs. If you are adding a custom dictionary or editing it.
+
+```nim
+
+```
+
 # Citations
 
 For English dictionary:
@@ -77,7 +89,7 @@ For English dictionary:
 # TODOs
 - [ ] make commands from all languages work regardless
 - [ ] change dictionaries to have all words in one list
-- [ ] add dictionaries to dictionaries
+- [ ] add more dictionaries to dictionaries
 - [ ] add more languages
 - [ ] add more commands
     
