@@ -108,21 +108,15 @@ while true:
   elif user_input[0]=='a':
     letters = letters & user_input.split(' ')[1]
     var new_wordlist: seq[Word]
-    old_wordlist = newSeq[Word](0) #make a better old words structure better to allow further backtracking
+    old_wordlist = wordlist #make a better old words structure better to allow further backtracking
     for word in wordlist:
       if len(word.word)>=len(letters) and word.word[0..len(letters)-1]==letters:
         new_wordlist.add(word)
-      else:
-        old_wordlist.add(word)
     wordlist=new_wordlist
   #back
   elif user_input[0]=='b':
     letters=letters[0..^2]
-    for word in old_wordlist:
-      if len(word.word)>=len(letters) and word.word[0..len(letters)-1]==letters:
-        wordlist.add(word)
-    #TODO add a sort here
-
+    wordlist=old_wordlist
 
 #Exiting
 if config["last_language"].getStr()!=language:
