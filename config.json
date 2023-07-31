@@ -1,0 +1,30 @@
+{
+    "last_language": "german",
+    "language_specific": {
+        "english": {
+            "language_codes": ["EN", "eng", "en", "english"],
+            "dictionaries": ["english.json"],
+            "commands": {
+                "quit": {
+                    "keys": ["q", "quit"],
+                    "help": "Quits the script"
+                },
+                "help": {
+                    "keys": ["h", "help"],
+                    "help": "prints help message"
+                },
+                "restart": ["r", "restart"],
+                "add": ["a", "add"],
+                "undo": ["u", "undo"],
+                "mark": ["m", "mark"],
+                "unmark": ["um", "unmark"]
+            }
+        },
+        "german": {
+            "language_codes": ["DE", "de", "ger", "deu", "german"]
+        },
+        "russian": {
+            "language_codes": ["RU", "ru", "rus", "russian"]
+        }
+    }
+}
