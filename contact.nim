@@ -57,11 +57,12 @@ type Word = object
     word: string
     definitions: seq[string]
 
-var wordlist: seq[Word]
-var old_wordlist: seq[Word]
+var main_wordlist: seq[seq[Word]] = @[@[]]
+template current_wordlist: var seq[Word] = main_wordlist[^1]
+# var action_log: seq[string]
 
 for w in dictionary[letters]:
-  wordlist.add(Word(word: w[1].getStr(), rank: w[0].getInt(), definitions: to(w[2],seq[string])))
+  main_wordlist[0].add(Word(word: w[1].getStr(), rank: w[0].getInt(), definitions: to(w[2],seq[string])))
 dictionary.`=destroy`()
 
 proc printWordlist(wordlist: seq[Word],words_per_page:int=50,page_n: int = 0) =
@@ -74,49 +75,69 @@ proc printWordlist(wordlist: seq[Word],words_per_page:int=50,page_n: int = 0) =
       echo "  |" & d
     i-=1
 
+#command parser
+#make command index
+var command_index: seq[tuple[commandText: string, comandID: string]]
+for command in keys(config["language_specific"][language]["commands"]):
+  for text in config["language_specific"][language]["commands"][command]["keys"]:
+    command_index.add((text.getStr(), command))
+#command lookup
+proc commandParser(user_input: string, command_index: seq[tuple[commandText: string, comandID: string]]): seq[string] =
+  let split_input=user_input.split(' ')
+  for command_tup in command_index:
+    if len(command_tup.commandText)<=len(split_input[0]):
+      if command_tup.commandText==split_input[0]:
+        if len(split_input)==1:
+          return @[command_tup.comandID,""]
+        else:
+          return @[command_tup.comandID,split_input[1]]
+
 #command cycle
 while true:
-  printWordlist(wordlist,words_per_page,page)
+  printWordlist(current_wordlist,words_per_page,page)
   echo "\e[1mWords starting with: ", letters
   stdout.write("Enter Command:>\e[0m")
-  user_input=readLine(stdin)
+  var command=commandParser(readLine(stdin),command_index)
   ## commands
   # page flipping
-  if user_input[0]=='p':
+  if command[0]=="page":
     #parse
-    if len(user_input)==1 or user_input[1]=='+':
+    if len(command[1])==0 or command[1][0]=='+':
       page+=1
-    elif user_input[1]=='-':
+    elif command[1][0]=='-':
       page-=1
-    elif isDigit(user_input[1]):
-      page=parseint(user_input[1..^1])
+    elif isDigit(command[1][0]):
+      page=parseint(command[1])
     #adust page
     if page<0:
-      page+=(len(wordlist) div words_per_page)+1
-    elif (page+1)*words_per_page>len(wordlist):
-      page=page mod ((len(wordlist) div words_per_page)+1)
+      page+=(len(current_wordlist) div words_per_page)+1
+    elif (page+1)*words_per_page>len(current_wordlist):
+      page=page mod ((len(current_wordlist) div words_per_page)+1)
   #quit
-  elif user_input[0]=='q':
-    if len(user_input)>1 and user_input[1]=='!':
+  elif command[0]=="quit":
+    if len(command[1])>1 and command[1][0]=='!':
       discard
     else:
       break
   #help
-  elif user_input[0]=='h':
-    printHelpMessage(config)
+  elif command[0]=="help":
+    printHelpMessage(config["language_specific"][language])
   #add
-  elif user_input[0]=='a':
-    letters = letters & user_input.split(' ')[1]
+  elif command[0]=="add":
+    letters = letters & command[1]
     var new_wordlist: seq[Word]
-    old_wordlist = wordlist #make a better old words structure better to allow further backtracking
-    for word in wordlist:
+    for word in current_wordlist:
       if len(word.word)>=len(letters) and word.word[0..len(letters)-1]==letters:
         new_wordlist.add(word)
-    wordlist=new_wordlist
+    main_wordlist.add(new_wordlist)
+    page=0
   #back
-  elif user_input[0]=='b':
+  elif command[0]=="back":
     letters=letters[0..^2]
-    wordlist=old_wordlist
+    main_wordlist.delete(len(main_wordlist)-1)
+    page=0
+  #log
+  # action_log.add()
 
 #Exiting
 if config["last_language"].getStr()!=language:
