@@ -96,13 +96,9 @@ In order to make your language.dictionary selectable, you will have to put it in
                 "keys": ["д", "добавиль"],
                 "help": "adds the next letter"
             },
-            "back": {
+            "remove": {
                 "keys": ["о", "обратно"],
                 "help": "Goes back one letter"
-            },
-            "undo": {
-                "keys": ["u", "undo"],
-                "help": "Undoes your last action"
             },
             "mark": {
                 "keys": ["m", "mark"],

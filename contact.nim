@@ -1,5 +1,6 @@
 import json
 import  strutils
+import std/unicode
 
 #load config
 var config = parseFile("config.json")
@@ -44,12 +45,12 @@ proc printHelpMessage(language_specific:JsonNode) =
 
 printHelpMessage(config["language_specific"][language])
 #load dictioanry
-var dictionary = parseFile("dictionaries/" & dictionary_file_name)
+var dictionary: JsonNode = parseFile("dictionaries/" & dictionary_file_name)
 
 #Start
 stdout.write("Enter first letter:")
 var user_input=readLine(stdin)
-var letters: string = $user_input[0]
+var letters: seq[Rune] = @[user_input.toRunes()[0]]
 var page: int = 0;
 
 type Word = object
@@ -57,11 +58,10 @@ type Word = object
     word: string
     definitions: seq[string]
 
-var main_wordlist: seq[seq[Word]] = @[@[]]
+var main_wordlist: seq[seq[Word]] = @[newSeq[Word](0)]
 template current_wordlist: var seq[Word] = main_wordlist[^1]
-# var action_log: seq[string]
 
-for w in dictionary[letters]:
+for w in dictionary[$letters]:
   main_wordlist[0].add(Word(word: w[1].getStr(), rank: w[0].getInt(), definitions: to(w[2],seq[string])))
 dictionary.`=destroy`()
 
@@ -124,20 +124,19 @@ while true:
     printHelpMessage(config["language_specific"][language])
   #add
   elif command[0]=="add":
-    letters = letters & command[1]
+    letters = letters & command[1].toRunes()
+    let str_letters: string = $letters
     var new_wordlist: seq[Word]
     for word in current_wordlist:
-      if len(word.word)>=len(letters) and word.word[0..len(letters)-1]==letters: #FIXME make this case insensitive
+      if len(word.word)>=len(str_letters) and word.word[0..len(str_letters)-1]==str_letters.toLower(): #FIXME make this case insensitive
         new_wordlist.add(word)
     main_wordlist.add(new_wordlist)
     page=0
   #back
-  elif command[0]=="back":
+  elif command[0]=="remove":
     letters=letters[0..^2]
     main_wordlist.delete(len(main_wordlist)-1)
     page=0
-  #log
-  # action_log.add()
 
 #Exiting
 if config["last_language"].getStr()!=language:

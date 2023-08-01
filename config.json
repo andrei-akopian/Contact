@@ -18,13 +18,9 @@
                     "keys": ["a", "add"],
                     "help": "adds the next letter"
                 },
-                "back": {
-                    "keys": ["b", "back"],
+                "remove": {
+                    "keys": ["r", "remove"],
                     "help": "Goes back one letter"
-                },
-                "undo": {
-                    "keys": ["u", "undo"],
-                    "help": "Undoes your last action"
                 },
                 "mark": {
                     "keys": ["m", "mark"],
@@ -46,7 +42,7 @@
         },
         "russian": {
             "language_codes": ["RU", "ru", "rus", "russian"],
-            "dictionaries": ["russian.json", "english.json"],
+            "dictionaries": ["russian.json"],
             "commands": {
                 "quit": {
                     "keys": ["в", "выйти"],
@@ -60,13 +56,9 @@
                     "keys": ["д", "добавиль"],
                     "help": "adds the next letter"
                 },
-                "back": {
-                    "keys": ["о", "обратно"],
+                "remove": {
+                    "keys": ["у", "убрать"],
                     "help": "Goes back one letter"
-                },
-                "undo": {
-                    "keys": ["u", "undo"],
-                    "help": "Undoes your last action"
                 },
                 "mark": {
                     "keys": ["m", "mark"],
