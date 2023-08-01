@@ -127,7 +127,7 @@ while true:
     letters = letters & command[1]
     var new_wordlist: seq[Word]
     for word in current_wordlist:
-      if len(word.word)>=len(letters) and word.word[0..len(letters)-1]==letters:
+      if len(word.word)>=len(letters) and word.word[0..len(letters)-1]==letters: #FIXME make this case insensitive
         new_wordlist.add(word)
     main_wordlist.add(new_wordlist)
     page=0

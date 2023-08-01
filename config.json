@@ -1,1 +1,86 @@
-{"last_language":"russian","words_per_page":25,"language_specific":{"english":{"language_codes":["EN","eng","en","english"],"dictionaries":["english.json"],"commands":{"quit":{"keys":["q","quit"],"help":"Quits the script"},"help":{"keys":["h","help"],"help":"prints help message"},"add":{"keys":["a","add"],"help":"adds the next letter"},"back":{"keys":["b","back"],"help":"Goes back one letter"},"undo":{"keys":["u","undo"],"help":"Undoes your last action"},"mark":{"keys":["m","mark"],"help":"Marks words as used"},"unmark":{"keys":["um","unmark"],"help":"Unmarks marked words"},"page":{"keys":["p","page"],"help":"p+ p- Flip pages of the dicitonary"}}},"german":{"language_codes":["DE","de","ger","deu","german"],"dictionaries":["german.json"]},"russian":{"language_codes":["RU","ru","rus","russian"],"dictionaries":["russian.json","english.json"],"commands":{"quit":{"keys":["в","выйти"],"help":"Quits the script"},"help":{"keys":["п","помощь"],"help":"prints help message"},"add":{"keys":["д","добавиль"],"help":"adds the next letter"},"back":{"keys":["о","обратно"],"help":"Goes back one letter"},"undo":{"keys":["u","undo"],"help":"Undoes your last action"},"mark":{"keys":["m","mark"],"help":"Marks words as used"},"unmark":{"keys":["um","unmark"],"help":"Unmarks marked words"},"page":{"keys":["с","страница"],"help":"p+ p- Flip pages of the dicitonary"}}}}}
+{
+    "last_language": "russian",
+    "words_per_page": 25,
+    "language_specific": {
+        "english": {
+            "language_codes": ["EN", "eng", "en", "english"],
+            "dictionaries": ["english.json"],
+            "commands": {
+                "quit": {
+                    "keys": ["q", "quit"],
+                    "help": "Quits the script"
+                },
+                "help": {
+                    "keys": ["h", "help"],
+                    "help": "prints help message"
+                },
+                "add": {
+                    "keys": ["a", "add"],
+                    "help": "adds the next letter"
+                },
+                "back": {
+                    "keys": ["b", "back"],
+                    "help": "Goes back one letter"
+                },
+                "undo": {
+                    "keys": ["u", "undo"],
+                    "help": "Undoes your last action"
+                },
+                "mark": {
+                    "keys": ["m", "mark"],
+                    "help": "Marks words as used"
+                },
+                "unmark": {
+                    "keys": ["um", "unmark"],
+                    "help": "Unmarks marked words"
+                },
+                "page": {
+                    "keys": ["p", "page"],
+                    "help": "p+ p- Flip pages of the dicitonary"
+                }
+            }
+        },
+        "german": {
+            "language_codes": ["DE", "de", "ger", "deu", "german"],
+            "dictionaries": ["german.json"]
+        },
+        "russian": {
+            "language_codes": ["RU", "ru", "rus", "russian"],
+            "dictionaries": ["russian.json", "english.json"],
+            "commands": {
+                "quit": {
+                    "keys": ["в", "выйти"],
+                    "help": "Quits the script"
+                },
+                "help": {
+                    "keys": ["п", "помощь"],
+                    "help": "prints help message"
+                },
+                "add": {
+                    "keys": ["д", "добавиль"],
+                    "help": "adds the next letter"
+                },
+                "back": {
+                    "keys": ["о", "обратно"],
+                    "help": "Goes back one letter"
+                },
+                "undo": {
+                    "keys": ["u", "undo"],
+                    "help": "Undoes your last action"
+                },
+                "mark": {
+                    "keys": ["m", "mark"],
+                    "help": "Marks words as used"
+                },
+                "unmark": {
+                    "keys": ["um", "unmark"],
+                    "help": "Unmarks marked words"
+                },
+                "page": {
+                    "keys": ["с", "страница"],
+                    "help": "p+ p- Flip pages of the dicitonary"
+                }
+            }
+        }
+    }
+}

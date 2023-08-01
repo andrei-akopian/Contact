@@ -11,6 +11,8 @@ This is a script for the "contact" game. (Not as the gameboard but as a player/a
 
 # Game Rules
 
+[Link To a Better Explanation](https://www.ludozofi.com/home/games/contact/#:~:text=Contact%20is%20a%20word%2Dguessing,asking%20questions%20to%20the%20wordmaster.)
+
 You need 3 or more players.
 
 One person (let's call him "warden") thinks of a word (the word has to be a valid noun. eg. `"apple"`) and annouces the first letter (eg.`"a"`).
@@ -50,7 +52,7 @@ If you want to add your own language, here is what you need to do (2 things):
 
 ## Create 1 or more dictionaries
 
-In the dictionaries folder, create a JSON file with the name of the language and fill it like this:
+In the `/dictionaries` folder, create a JSON file with the name of the language and fill it like this:
 
 ```nim
 # language.json
@@ -73,11 +75,60 @@ More instructions in `processor.ipynb`
 
 ## Add the dictionary (and language) into config.json
 
-In order to make your language selectable, you will have to put it into configs. If you are adding a custom dictionary or editing it.
+In order to make your language.dictionary selectable, you will have to put it into `config.json`. Open `config.json`.
 
 ```nim
-
+{
+  "language_specific"{
+    "your_language"{
+      "language_codes": ["RU", "ru", "rus", "russian"],
+        "dictionaries": ["russian.json", "english.json"],
+        "commands": {
+            "quit": {
+                "keys": ["в", "выйти"],
+                "help": "Quits the script"
+            },
+            "help": {
+                "keys": ["п", "помощь"],
+                "help": "prints help message"
+            },
+            "add": {
+                "keys": ["д", "добавиль"],
+                "help": "adds the next letter"
+            },
+            "back": {
+                "keys": ["о", "обратно"],
+                "help": "Goes back one letter"
+            },
+            "undo": {
+                "keys": ["u", "undo"],
+                "help": "Undoes your last action"
+            },
+            "mark": {
+                "keys": ["m", "mark"],
+                "help": "Marks words as used"
+            },
+            "unmark": {
+                "keys": ["um", "unmark"],
+                "help": "Unmarks marked words"
+            },
+            "page": {
+                "keys": ["с", "страница"],
+                "help": "p+ p- Flip pages of the dicitonary"
+            }
+        }
+    }
+  }
+}
 ```
+
+`languege_codes` are the ways you call your language, usually the country code, lowercase lanugage name and codes in [ISO 639.1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes). Language codes are parsed in the order they appear in the config file, be carefull about duplicate language_codes.
+
+`dictionaries` is a list of dicitonaries (files) in the `/dictionaries` folder that belong to this language. You can add multiple, the script will prompt you to select a dictionary from this list if there are multiple.
+
+`commands` the script provides the option to type the commands in a different language so you don't have to switch keyboards all the time, you will have to make translations for all the commands. Translate only the "key":**"values"**, don't translate the "key"s. You can use the russain and german configurations as an example/template.
+
+If you actually go so far as to make a custom dictionary or language, please make a pull request.
 
 # Citations
 
@@ -86,9 +137,14 @@ For English dictionary:
 - Definitions: [Bird, Steven, Edward Loper and Ewan Klein (2009), Natural Language Processing with Python. O’Reilly Media Inc.](https://www.nltk.org) 
   - Princeton University "About WordNet." [WordNet](https://wordnet.princeton.edu/). Princeton University. 2010. 
 
+For Russian dictionary:
+- Wordlist: https://github.com/hingston/russian/blob/master/100000-russian-words.txt
+- Definitions: https://github.com/Harrix/Russian-Nouns
+
 # TODOs
 - [ ] make commands from all languages work regardless
 - [ ] change dictionaries to have all words in one list
+- [ ] faster to parse dictionaries
 - [ ] add more dictionaries to dictionaries
 - [ ] add more languages
 - [ ] add more commands
