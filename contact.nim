@@ -115,10 +115,7 @@ while true:
       page=page mod ((len(current_wordlist) div words_per_page)+1)
   #quit
   elif command[0]=="quit":
-    if len(command[1])>1 and command[1][0]=='!':
-      discard
-    else:
-      break
+    break
   #help
   elif command[0]=="help":
     printHelpMessage(config["language_specific"][language])

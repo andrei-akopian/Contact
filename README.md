@@ -3,6 +3,8 @@ This is a script for the "contact" game. (Not as the gameboard but as a player/a
 ### Table of Contents
 - [Game Rules](#game-rules)
 - [Usage](#usage)
+  - [Compiling](#compiling)
+  - [Navigation](#navigation)
 - [Custom Languages](#custom-languages)
   - [Create 1 or more dictionaries](#create-1-or-more-dictionaries)
   - [Add the dictionary (and language) into config.json](#add-the-dictionary-and-language-into-configjson)
@@ -45,6 +47,38 @@ Additional rules:
 - The players shouldn't use aids such as dictionaries (or this script), but the warden should doublecheck the spelling, to make sure he is giving the correct letters, or if he thinks the riddler spelled his own word incorrectly (in which case the riddle is invalid).
 
 # Usage
+
+The app is used from the terminal (On phones use [Termux](https://termux.dev/en/)), so you will need to know how the terminal works.
+
+## Compiling
+
+You will need [git](https://git-scm.com/) and [nim](https://nim-lang.org/).
+
+(`cd Downloads` if you have and want it to be in your downloads folder.)
+
+`git clone https://github.com/andrei-akopian/Contact`
+
+`cd Contact`
+
+compile `contact.nim` by typing: `nim c contact.nim` which will create `contact` binary file.
+
+You can run the script by typing `./contact` into the terminal
+
+## Navigation
+
+First you will be asked to choose a language. Enter the language code or name: for english its "eng", for russian you can enter "ru" or "ру".
+
+Then, if multiple dictionaries are available for this language, you will be asked to choose one. (If there is only 1 dictionary, this step is skipped).
+
+Then a help message will be displayed showing all available the commands. All commands have 2 components: `command argument`: eg. `add l` (adds the next letter) Note that there are custom commands for every language so you won't have to swap between eg. latin and chyrillic keyboards. Also note that the cyrillic `а` and latin `a` are different unicode characters and are not the same, you won't get any results if you enter one instead of the other.
+
+You will than be asked to enter the first letter, no commands here. After you press Enter. A list of most common words in your language that start with that letter will be displayed. You can see less common words by scrolling up. There are 25 words per page, to see more words, enter `p` or `page +` into the commandline, this will flip to the next page of the dictionary.
+
+Once you have gotten the next letter from the "warden," enter `add l` (replace "l" with your letter). The dictionary will be sorted and you will see the new sorted list of words. If you entered a wrong letter by accident, you can use `remove` to remove the last letter.
+
+Once you have (hopefully) won the game, use `quit` to leave.
+
+You can use the `help` command to see the help message.
 
 # Custom Languages
 
@@ -149,4 +183,6 @@ For German dicitonary:
 - [ ] add more languages
 - [ ] add more commands
 - [ ] Capitalize German
+- [ ] add mark and unmark
+- [ ] mb. use regex to consider similar letter combinarions the same
     

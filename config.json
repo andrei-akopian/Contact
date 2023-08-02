@@ -1,1 +1,110 @@
-{"last_language":"german","words_per_page":25,"language_specific":{"english":{"language_codes":["EN","eng","en","english"],"dictionaries":["english.json"],"message":"","commands":{"quit":{"keys":["q","quit"],"help":"Quits the script"},"help":{"keys":["h","help"],"help":"prints help message"},"add":{"keys":["a","add"],"help":"adds the next letter"},"remove":{"keys":["r","remove"],"help":"Goes back one letter"},"mark":{"keys":["m","mark"],"help":"Marks words as used"},"unmark":{"keys":["um","unmark"],"help":"Unmarks marked words"},"page":{"keys":["p","page"],"help":"p+ p- Flip pages of the dicitonary"}}},"german":{"language_codes":["DE","de","ger","deu","german"],"dictionaries":["german.json"],"message":"Die wörter werden in der nächsten version capitaliziert.","commands":{"quit":{"keys":["v","verlassen"],"help":"beendet/verlasst das program"},"help":{"keys":["h","hilfe"],"help":"zeigt die hilfe Narchicht"},"add":{"keys":["z","zufüge"],"help":"zufüge die nächste Büchstabe"},"remove":{"keys":["l","löshe"],"help":"löshe die letzte Buchstabe"},"mark":{"keys":["m","markieren"],"help":"Markiert ein wort"},"unmark":{"keys":["um","unmarkieren"],"help":"lösht die Markierung von markieretm Wort"},"page":{"keys":["s","seite"],"help":"s + und s - blätern die seite des Wörterbuchs"}}},"russian":{"language_codes":["RU","ru","rus","russian"],"dictionaries":["russian.json"],"commands":{"quit":{"keys":["в","выйти"],"help":"Quits the script"},"help":{"keys":["п","помощь"],"help":"prints help message"},"add":{"keys":["д","добавиль"],"help":"adds the next letter"},"remove":{"keys":["у","убрать"],"help":"Goes back one letter"},"mark":{"keys":["m","mark"],"help":"Marks words as used"},"unmark":{"keys":["um","unmark"],"help":"Unmarks marked words"},"page":{"keys":["с","страница"],"help":"p+ p- Flip pages of the dicitonary"}}}}}
+{
+    "last_language": "german",
+    "words_per_page": 25,
+    "language_specific": {
+        "english": {
+            "language_codes": ["EN", "eng", "en", "english"],
+            "dictionaries": ["english.json"],
+            "message": "",
+            "commands": {
+                "quit": {
+                    "keys": ["q", "quit"],
+                    "help": "Quits the script"
+                },
+                "help": {
+                    "keys": ["h", "help"],
+                    "help": "prints help message"
+                },
+                "add": {
+                    "keys": ["a", "add"],
+                    "help": "adds the next letter"
+                },
+                "remove": {
+                    "keys": ["r", "remove"],
+                    "help": "Goes back one letter"
+                },
+                "mark": {
+                    "keys": ["m", "mark"],
+                    "help": "Marks words as used"
+                },
+                "unmark": {
+                    "keys": ["um", "unmark"],
+                    "help": "Unmarks marked words"
+                },
+                "page": {
+                    "keys": ["p", "page"],
+                    "help": "p+ p- Flip pages of the dicitonary"
+                }
+            }
+        },
+        "german": {
+            "language_codes": ["DE", "de", "ger", "deu", "german", "Deutsch"],
+            "dictionaries": ["german.json"],
+            "message": "Die wörter werden in der nächsten version capitaliziert.",
+            "commands": {
+                "quit": {
+                    "keys": ["v", "verlassen"],
+                    "help": "beendet/verlasst das program"
+                },
+                "help": {
+                    "keys": ["h", "hilfe"],
+                    "help": "zeigt die hilfe Narchicht"
+                },
+                "add": {
+                    "keys": ["z", "zufüge"],
+                    "help": "zufüge die nächste Büchstabe"
+                },
+                "remove": {
+                    "keys": ["l", "löshe"],
+                    "help": "löshe die letzte Buchstabe"
+                },
+                "mark": {
+                    "keys": ["m", "markieren"],
+                    "help": "Markiert ein wort"
+                },
+                "unmark": {
+                    "keys": ["um", "unmarkieren"],
+                    "help": "lösht die Markierung von markieretm Wort"
+                },
+                "page": {
+                    "keys": ["s", "seite"],
+                    "help": "s + und s - blätern die seite des Wörterbuchs"
+                }
+            }
+        },
+        "russian": {
+            "language_codes": ["RU", "ru", "rus", "russian", "ру", "русский"],
+            "dictionaries": ["russian.json"],
+            "commands": {
+                "quit": {
+                    "keys": ["в", "выйти"],
+                    "help": "Quits the script"
+                },
+                "help": {
+                    "keys": ["п", "помощь"],
+                    "help": "prints help message"
+                },
+                "add": {
+                    "keys": ["д", "добавиль"],
+                    "help": "adds the next letter"
+                },
+                "remove": {
+                    "keys": ["у", "убрать"],
+                    "help": "Goes back one letter"
+                },
+                "mark": {
+                    "keys": ["m", "mark"],
+                    "help": "Marks words as used"
+                },
+                "unmark": {
+                    "keys": ["um", "unmark"],
+                    "help": "Unmarks marked words"
+                },
+                "page": {
+                    "keys": ["с", "страница"],
+                    "help": "p+ p- Flip pages of the dicitonary"
+                }
+            }
+        }
+    }
+}
