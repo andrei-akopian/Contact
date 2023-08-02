@@ -41,7 +41,7 @@ Additional rules:
 - Only nouns can be used in the game, 2 word nouns shouldn't be used.
 - "obscure" words shoudln't be used. ("chlorofluorocarbons","homo sapiens" etc.)
 - no repeating words
-- The spelling of all words has to be correct.
+- Traditionally, spelling matters, but in some languages it is better/more fun to play with sounds and consider cerain letter combinations the same (eg. k and ck).
 - The players shouldn't use aids such as dictionaries (or this script), but the warden should doublecheck the spelling, to make sure he is giving the correct letters, or if he thinks the riddler spelled his own word incorrectly (in which case the riddle is invalid).
 
 # Usage
@@ -71,7 +71,7 @@ The number is the frequency rank of the word.
 
 The words are categorized based on the first letter to avoid doing the sort the first time. Just me doing premature optimization.
 
-More instructions in `processor.ipynb`
+More examples/instructions in `processor.ipynb`
 
 ## Add the dictionary (and language) into config.json
 
@@ -137,6 +137,10 @@ For Russian dictionary:
 - Wordlist: https://github.com/hingston/russian/blob/master/100000-russian-words.txt
 - Definitions: https://github.com/Harrix/Russian-Nouns
 
+For German dicitonary:
+- Wordlist: https://github.com/olastor/german-word-frequencies/blob/main/opensubtitles/opensubtitles_cistem_freq.csv
+- Defenitions: [odenet](https://github.com/hdaSprachtechnologie/odenet)
+
 # TODOs
 - [ ] make commands from all languages work regardless
 - [ ] change dictionaries to have all words in one list
@@ -144,4 +148,5 @@ For Russian dictionary:
 - [ ] add more dictionaries to dictionaries
 - [ ] add more languages
 - [ ] add more commands
+- [ ] Capitalize German
     
