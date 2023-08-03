@@ -80,7 +80,7 @@ proc printWordlist(wordlist: seq[Word],words_per_page:int=50,page_n: int = 0,n_o
   #page math
   let total_words = len(wordlist)-n_of_marked
   var total_pages = (total_words div words_per_page)
-  if total_words mod (words_per_page*total_pages)>0:
+  if total_words mod words_per_page>0:
     total_pages += 1
 
   while page<0:
@@ -103,7 +103,6 @@ proc printWordlist(wordlist: seq[Word],words_per_page:int=50,page_n: int = 0,n_o
       i=bottom+marked_counter
       break
   let mark_word: int = i
-  echo mark_word
   #make list with content of the page
   while len(page_content)<words_per_page and i<top:
     if not wordlist[i].mark:
@@ -188,8 +187,10 @@ while true:
           n_of_marked+=1
     if len(new_wordlist)==0:
       echo language["messages"]["no_words_remaining"].getStr()
-    main_wordlist.add(new_wordlist)
-    page=0
+      dont_print_wordlist = true
+    else:
+      main_wordlist.add(new_wordlist)
+      page=0
   #back
   elif command[0]=="remove":
     letters=letters[0..^2]
