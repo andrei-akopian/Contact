@@ -2,18 +2,19 @@
     "language_name": "russian",
     "dictionaries": ["russian.json"],
     "messages": {
-        "selected_language": "Selected Language: English",
-        "available_dictionaries": "Available dictionaries:",
-        "enter_choice_number": "Enter number, (defualt 0):",
-        "available_commands": "Commands:",
-        "loading_dictionary": "Loading dictionary: ",
-        "enter_first_letter": "Enter first letter:",
-        "words_starting_with": "Words starting with: ",
-        "enter_command": "Enter Command:>"
+        "selected_language": "Выбраный язык: русский",
+        "available_dictionaries": "Доступные словори:",
+        "enter_choice_number": "Введите номер, (по умолчанию 0):",
+        "available_commands": "Команды:",
+        "loading_dictionary": "Загрузить словарь: ",
+        "enter_first_letter": "Введите первою букву:",
+        "words_starting_with": "Слова начиная с: ",
+        "enter_command": "Введите команду:>",
+        "bad_command": "Что-то не так с командой."
     },
     "commands": {
         "quit": {
-            "keys": ["в", "выйти"],
+            "keys": ["в", "выйти", "q", "quit"],
             "help": "покинуть игру"
         },
         "help": {

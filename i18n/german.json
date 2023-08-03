@@ -2,18 +2,19 @@
     "language_name": "german",
     "dictionaries": ["german_capitalized.json", "german.json"],
     "messages": {
-        "selected_language": "Selected Language: English",
-        "available_dictionaries": "Available dictionaries:",
-        "enter_choice_number": "Enter number, (defualt 0):",
-        "available_commands": "Commands:",
-        "loading_dictionary": "Loading dictionary: ",
-        "enter_first_letter": "Enter first letter:",
-        "words_starting_with": "Words starting with: ",
-        "enter_command": "Enter Command:>"
+        "selected_language": "Gewählte Sprache: Deutsch",
+        "available_dictionaries": "Verfügbare Wörterbücher:",
+        "enter_choice_number": "Eingebe Numer, (defualt 0):",
+        "available_commands": "Verfügbare Kommanden:",
+        "loading_dictionary": "Wörterbuch wird geladen: ",
+        "enter_first_letter": "Geben die erste Buchstabe ein:",
+        "words_starting_with": "Wörter die starten mit: ",
+        "enter_command": "Kommande:>",
+        "bad_command": "Etwas falsh mit der kommande..."
     },
     "commands": {
         "quit": {
-            "keys": ["v", "verlassen"],
+            "keys": ["v", "verlassen", "q", "quit"],
             "help": "beendet/verlasst das program"
         },
         "help": {

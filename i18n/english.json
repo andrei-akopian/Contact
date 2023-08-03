@@ -9,7 +9,8 @@
         "loading_dictionary": "Loading dictionary: ",
         "enter_first_letter": "Enter first letter:",
         "words_starting_with": "Words starting with: ",
-        "enter_command": "Enter Command:>"
+        "enter_command": "Enter Command:>",
+        "bad_command": "Something wrong with the command."
     },
     "commands": {
         "quit": {

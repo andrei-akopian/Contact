@@ -135,7 +135,7 @@ proc commandParser(user_input: string, command_index: seq[tuple[commandText: str
           return @[command_tup.comandID,""]
         else:
           return @[command_tup.comandID,split_input[1]]
-  return @["help","Bad Command"]
+  return @["help","bc"]
 
 #* MAIN LOOP
 #marking
@@ -171,7 +171,8 @@ while true:
     break
   #help
   elif command[0]=="help":
-    echo command[1]
+    if command[1]=="bd":
+      echo language["messages"]["bad_command"]
     printHelpMessage(language)
     dont_print_wordlist=true
   #add
