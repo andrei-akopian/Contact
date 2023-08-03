@@ -105,56 +105,35 @@ The number is the frequency rank of the word.
 
 The words are categorized based on the first letter to avoid doing the sort the first time. Just me doing premature optimization.
 
+[WordNet](https://en.wikipedia.org/wiki/WordNet) and related [libraries](https://wn.readthedocs.io/en/latest/) might prove helpfull for doing this task.
+
 More examples/instructions in `processor.ipynb`
 
 ## Add the dictionary (and language) into config.json
 
-In order to make your language.dictionary selectable, you will have to put it into `config.json`. Open `config.json`.
+In order to make your language.dictionary selectable, you will have to put it into `config.json`. Open `config.json`. Note: if your language is already present, you won't have to do most of the steps.
 
 ```nim
 {
   "language_specific"{
     "your_language"{
+      "native_name":"русский"б
       "language_codes": ["RU", "ru", "rus", "russian"],
-        "dictionaries": ["russian.json", "english.json"],
-        "commands": {
-            "quit": {
-                "keys": ["в", "выйти"],
-                "help": "Quits the script"
-            },
-            "help": {
-                "keys": ["п", "помощь"],
-                "help": "prints help message"
-            },
-            "add": {
-                "keys": ["д", "добавиль"],
-                "help": "adds the next letter"
-            },
-            "remove": {
-                "keys": ["о", "обратно"],
-                "help": "Goes back one letter"
-            },
-            "mark": {
-                "keys": ["m", "mark"],
-                "help": "Marks words as used"
-            },
-            "unmark": {
-                "keys": ["um", "unmark"],
-                "help": "Unmarks marked words"
-            },
-            "page": {
-                "keys": ["с", "страница"],
-                "help": "p+ p- Flip pages of the dicitonary"
-            }
-        }
-    }
+      "i18n":"russain.json"
+    }s
   }
 }
 ```
 
+You should add/find this section for you language and add the language codes to it.
+
 `languege_codes` are the ways you call your language, usually the country code, lowercase lanugage name and codes in [ISO 639.1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes). Language codes are parsed in the order they appear in the config file, be carefull about duplicate language_codes.
 
-`dictionaries` is a list of dicitonaries (files) in the `/dictionaries` folder that belong to this language. You can add multiple, the script will prompt you to select a dictionary from this list if there are multiple.
+After that go to the i18n folder, and find/create a `.json` file for your langauge. In `config.json` put the name of this file in `"i18n":"yourlanguage.json"`
+
+Then use any of the other i18n files (`english.json`) as a template to make translations for your own language.
+ 
+`dictionaries` is a list of dicitonaries (files) in the `/dictionaries` folder that belong to this language. Add any dictionaries you created here, the script will prompt you to select a dictionary from this list if there are multiple. (first dictioonary in the list is the default one)
 
 `commands` the script provides the option to type the commands in a different language so you don't have to switch keyboards all the time, you will have to make translations for all the commands. Translate only the "key":**"values"**, don't translate the "key"s. You can use the russain and german configurations as an example/template.
 
@@ -182,7 +161,8 @@ For German dicitonary:
 - [ ] add more dictionaries to dictionaries
 - [ ] add more languages
 - [ ] add more commands
-- [ ] Capitalize German
+- [x] Capitalize German
 - [ ] add mark and unmark
 - [ ] mb. use regex to consider similar letter combinarions the same
+- [ ] add input validation
     

@@ -1,5 +1,5 @@
 import json
-import  strutils
+import strutils
 import std/unicode
 
 #load config
@@ -7,49 +7,59 @@ var config = parseFile("config.json")
 let words_per_page = config["words_per_page"].getInt()
 
 #Get for the language
-proc getLanguage(config: JsonNode): string =
-  var language = config["last_language"].getStr()
-  stdout.write("Enter language or language code. Press Enter for default (",language,"):")
+proc getLanguage(config: JsonNode): JsonNode =
+  var last_language = config["last_language"].getStr()
+  var language: JsonNode
+
+  #text
+  echo "\e[1mAvailable Languages\e[0m" #TODO make the language codes presence a bit more clear
+  for key in keys(config["languages"]):
+    echo "- ",config["languages"][key]["native_name"].getStr()
+  stdout.write("Choose language: default (",last_language,"):")
+
+  #parse language
   let user_input=readLine(stdin)
-  for key in keys(config["language_specific"]):
-    if user_input in to(config["language_specific"][key]["language_codes"],seq[string]):
-      language = key
-  echo "Selected language:",language
+  for key in keys(config["languages"]):
+    if user_input in to(config["languages"][key]["language_codes"],seq[string]):
+      language = parseFile("i18n/" & config["languages"][key]["i18n"].getStr())
+      break
+  if isNil(language):
+    language = parseFile("i18n/" & config["languages"][last_language]["i18n"].getStr())
+  echo language["messages"]["selected_language"].getStr()
   return language
 
 var language = getLanguage(config)
 
 #Choose dictionary
-var dictionary_choices = to(config["language_specific"][language]["dictionaries"],seq[string])
+var dictionary_choices = to(language["dictionaries"],seq[string])
 var dictionary_file_name: string
 if len(dictionary_choices)==1:
   dictionary_file_name=dictionary_choices[0]
 elif len(dictionary_choices)>1:
-  echo "Available dictionaries:"
+  echo language["messages"]["available_dictionaries"].getStr()
   for i,choice in dictionary_choices:
     echo i,"|",choice
-  stdout.write("Enter number, (defualt 0):")
+  stdout.write(language["messages"]["enter_choice_number"].getStr())
   let user_input=readLine(stdin)
   if user_input=="":
     dictionary_file_name=dictionary_choices[0]
   else:
     dictionary_file_name=dictionary_choices[parseInt(user_input)]
-  
-echo "Loading dictionary: ", dictionary_file_name
 
-proc printHelpMessage(language_specific:JsonNode) =
-  echo "\e[1mCommands:\e[0m"
-  let commands = language_specific["commands"]
+proc printHelpMessage(language:JsonNode) =
+  echo "\e[1m",language["messages"]["available_commands"].getStr(),"\e[0m"
+  let commands = language["commands"]
   for command in keys(commands):
     echo commands[command]["keys"],"-",commands[command]["help"]
 
-printHelpMessage(config["language_specific"][language])
+printHelpMessage(language)
 #load dictioanry
+echo language["messages"]["loading_dictionary"].getStr(), dictionary_file_name
 var dictionary: JsonNode = parseFile("dictionaries/" & dictionary_file_name)
 
 #Start
-stdout.write("Enter first letter:")
-var user_input=readLine(stdin)
+stdout.write(language["messages"]["enter_first_letter"].getStr())
+var user_input=readLine(stdin).toLower()
 var letters: seq[Rune] = @[user_input.toRunes()[0]]
 var page: int = 0;
 
@@ -78,8 +88,8 @@ proc printWordlist(wordlist: seq[Word],words_per_page:int=50,page_n: int = 0) =
 #command parser
 #make command index
 var command_index: seq[tuple[commandText: string, comandID: string]]
-for command in keys(config["language_specific"][language]["commands"]):
-  for text in config["language_specific"][language]["commands"][command]["keys"]:
+for command in keys(language["commands"]):
+  for text in language["commands"][command]["keys"]:
     command_index.add((text.getStr(), command))
 #command lookup
 proc commandParser(user_input: string, command_index: seq[tuple[commandText: string, comandID: string]]): seq[string] =
@@ -93,10 +103,15 @@ proc commandParser(user_input: string, command_index: seq[tuple[commandText: str
           return @[command_tup.comandID,split_input[1]]
 
 #command cycle
+var dont_print_wordlist: bool = false
+let words_starting_with_message=language["messages"]["words_starting_with"].getStr()
+let enter_command_message=language["messages"]["enter_command"].getStr()
 while true:
-  printWordlist(current_wordlist,words_per_page,page)
-  echo "\e[1mWords starting with: ", letters
-  stdout.write("Enter Command:>\e[0m")
+  if not dont_print_wordlist:
+    printWordlist(current_wordlist,words_per_page,page)
+    echo "\e[1m",words_starting_with_message, letters,"\e[0m"
+    dont_print_wordlist=false
+  stdout.write("\e[1m",enter_command_message,"\e[0m")
   var command=commandParser(readLine(stdin),command_index)
   ## commands
   # page flipping
@@ -118,14 +133,15 @@ while true:
     break
   #help
   elif command[0]=="help":
-    printHelpMessage(config["language_specific"][language])
+    printHelpMessage(language)
+    dont_print_wordlist=true
   #add
   elif command[0]=="add":
-    letters = letters & command[1].toRunes()
+    letters = letters & command[1].toLower().toRunes()
     let str_letters: string = $letters
     var new_wordlist: seq[Word]
     for word in current_wordlist:
-      if len(word.word)>=len(str_letters) and word.word[0..len(str_letters)-1]==str_letters.toLower(): #FIXME make this case insensitive
+      if len(word.word)>=len(str_letters) and word.word[0..len(str_letters)-1].toLower()==str_letters:
         new_wordlist.add(word)
     main_wordlist.add(new_wordlist)
     page=0
@@ -136,6 +152,6 @@ while true:
     page=0
 
 #Exiting
-if config["last_language"].getStr()!=language:
-  config["last_language"]= %* language
+if config["last_language"].getStr()!=language["language_name"].getStr():
+  config["last_language"]= %* language["language_name"].getStr()
   writeFile("config.json", $config)

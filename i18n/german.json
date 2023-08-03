@@ -1,0 +1,44 @@
+{
+    "language_name": "german",
+    "dictionaries": ["german_capitalized.json", "german.json"],
+    "messages": {
+        "selected_language": "Selected Language: English",
+        "available_dictionaries": "Available dictionaries:",
+        "enter_choice_number": "Enter number, (defualt 0):",
+        "available_commands": "Commands:",
+        "loading_dictionary": "Loading dictionary: ",
+        "enter_first_letter": "Enter first letter:",
+        "words_starting_with": "Words starting with: ",
+        "enter_command": "Enter Command:>"
+    },
+    "commands": {
+        "quit": {
+            "keys": ["v", "verlassen"],
+            "help": "beendet/verlasst das program"
+        },
+        "help": {
+            "keys": ["h", "hilfe"],
+            "help": "zeigt die hilfe Narchicht"
+        },
+        "add": {
+            "keys": ["z", "zufüge"],
+            "help": "zufüge die nächste Büchstabe"
+        },
+        "remove": {
+            "keys": ["l", "löshe"],
+            "help": "löshe die letzte Buchstabe"
+        },
+        "mark": {
+            "keys": ["m", "markieren"],
+            "help": "Markiert ein wort"
+        },
+        "unmark": {
+            "keys": ["um", "unmarkieren"],
+            "help": "lösht die Markierung von markieretm Wort"
+        },
+        "page": {
+            "keys": ["s", "seite"],
+            "help": "s + und s - blätern die seiten des Wörterbuchs"
+        }
+    }
+}

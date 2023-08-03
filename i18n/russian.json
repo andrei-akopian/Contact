@@ -1,0 +1,44 @@
+{
+    "language_name": "russian",
+    "dictionaries": ["russian.json"],
+    "messages": {
+        "selected_language": "Selected Language: English",
+        "available_dictionaries": "Available dictionaries:",
+        "enter_choice_number": "Enter number, (defualt 0):",
+        "available_commands": "Commands:",
+        "loading_dictionary": "Loading dictionary: ",
+        "enter_first_letter": "Enter first letter:",
+        "words_starting_with": "Words starting with: ",
+        "enter_command": "Enter Command:>"
+    },
+    "commands": {
+        "quit": {
+            "keys": ["в", "выйти"],
+            "help": "покинуть игру"
+        },
+        "help": {
+            "keys": ["п", "помощь"],
+            "help": "печатоет сообщение помощи"
+        },
+        "add": {
+            "keys": ["д", "добавиль"],
+            "help": "добавляет букву"
+        },
+        "remove": {
+            "keys": ["у", "убрать"],
+            "help": "уберает последнию букву"
+        },
+        "mark": {
+            "keys": ["п", "пометить"],
+            "help": "помечает слово"
+        },
+        "unmark": {
+            "keys": ["уп"],
+            "help": "уберает пометку с слова"
+        },
+        "page": {
+            "keys": ["с", "строница"],
+            "help": "с + и с - перелистывоют строницы словоря"
+        }
+    }
+}

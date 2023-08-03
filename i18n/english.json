@@ -1,0 +1,44 @@
+{
+    "language_name": "english",
+    "dictionaries": ["english.json"],
+    "messages": {
+        "selected_language": "Selected Language: English",
+        "available_dictionaries": "Available dictionaries:",
+        "enter_choice_number": "Enter number, (defualt 0):",
+        "available_commands": "Commands:",
+        "loading_dictionary": "Loading dictionary: ",
+        "enter_first_letter": "Enter first letter:",
+        "words_starting_with": "Words starting with: ",
+        "enter_command": "Enter Command:>"
+    },
+    "commands": {
+        "quit": {
+            "keys": ["q", "quit"],
+            "help": "Quits the script"
+        },
+        "help": {
+            "keys": ["h", "help"],
+            "help": "prints help message"
+        },
+        "add": {
+            "keys": ["a", "add"],
+            "help": "adds the next letter"
+        },
+        "remove": {
+            "keys": ["r", "remove"],
+            "help": "Goes back one letter"
+        },
+        "mark": {
+            "keys": ["m", "mark"],
+            "help": "Marks words as used"
+        },
+        "unmark": {
+            "keys": ["um", "unmark"],
+            "help": "Unmarks marked words"
+        },
+        "page": {
+            "keys": ["p", "page"],
+            "help": "p+ p- Flip pages of the dicitonary"
+        }
+    }
+}
