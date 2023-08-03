@@ -64,26 +64,59 @@ var letters: seq[Rune] = @[user_input.toRunes()[0]]
 var page: int = 0;
 
 type Word = object
-    rank: int
-    word: string
-    definitions: seq[string]
+  mark: bool
+  word: string
+  definitions: seq[string]
 
 var main_wordlist: seq[seq[Word]] = @[newSeq[Word](0)]
 template current_wordlist: var seq[Word] = main_wordlist[^1]
 
 for w in dictionary[$letters]:
-  main_wordlist[0].add(Word(word: w[1].getStr(), rank: w[0].getInt(), definitions: to(w[2],seq[string])))
+  main_wordlist[0].add(Word(word: w[1].getStr(), mark: false, definitions: to(w[2],seq[string])))
 dictionary.`=destroy`()
 
-proc printWordlist(wordlist: seq[Word],words_per_page:int=50,page_n: int = 0) =
-  var i = min((page_n+1)*words_per_page,len(wordlist))-1
-  let end_i = i-words_per_page
-  while end_i<i and -1<i:
-    var word=wordlist[i]
-    echo i, " - \e[1m", word.word, "\e[0m"
-    for d in word.definitions:
+proc printWordlist(wordlist: seq[Word],words_per_page:int=50,page_n: int = 0,n_of_marked:int): int =
+  var page_content: seq[tuple[word: Word, index: int]]
+  #page math
+  let total_words = len(wordlist)-n_of_marked
+  var total_pages = (total_words div words_per_page)
+  if total_words mod (words_per_page*total_pages)>0:
+    total_pages += 1
+
+  while page<0:
+    page+=total_pages
+  while page>total_pages-1:
+    page-=total_pages
+
+  #figure out page postion in worldist.
+  #you read the pages bottom up.
+  let top = min((page+1)*words_per_page,total_words) #top of the page index of unmarked words.
+  let bottom = page*words_per_page #bottom of page as index of unmarked words.
+  var marked_counter: int = 0
+  var i: int = -1
+  #figure out the true index of the bottom of the page, which is distorted by marked words.
+  while i-marked_counter<bottom:
+    i+=1
+    if wordlist[i].mark:
+      marked_counter+=1
+    if marked_counter==n_of_marked:
+      i=bottom+marked_counter
+      break
+  let mark_word: int = i
+  echo mark_word
+  #make list with content of the page
+  while len(page_content)<words_per_page and i<top:
+    if not wordlist[i].mark:
+      page_content.add((word: wordlist[i],index: i))
+    i+=1
+  #print
+  for i in countdown(len(page_content)-1,0,1):
+    let word = page_content[i]
+    echo word.index, " - \e[1m", word.word.word, "\e[0m"
+    for d in word.word.definitions:
       echo "  |" & d
-    i-=1
+  #return bottom element of the page
+  return mark_word
 
 #command parser
 #make command index
@@ -91,6 +124,7 @@ var command_index: seq[tuple[commandText: string, comandID: string]]
 for command in keys(language["commands"]):
   for text in language["commands"][command]["keys"]:
     command_index.add((text.getStr(), command))
+
 #command lookup
 proc commandParser(user_input: string, command_index: seq[tuple[commandText: string, comandID: string]]): seq[string] =
   let split_input=user_input.split(' ')
@@ -101,19 +135,28 @@ proc commandParser(user_input: string, command_index: seq[tuple[commandText: str
           return @[command_tup.comandID,""]
         else:
           return @[command_tup.comandID,split_input[1]]
+  return @["help","Bad Command"]
 
-#command cycle
+#* MAIN LOOP
+#marking
+var n_of_marked: int = 0
+var mark_word: int # word that will be marked if "mark" command is called
+var marked_word_list: seq[Word] = @[]
+#appearance logic
 var dont_print_wordlist: bool = false
+#messages
 let words_starting_with_message=language["messages"]["words_starting_with"].getStr()
 let enter_command_message=language["messages"]["enter_command"].getStr()
 while true:
+  #output and input
   if not dont_print_wordlist:
-    printWordlist(current_wordlist,words_per_page,page)
+    mark_word=printWordlist(current_wordlist,words_per_page,page,n_of_marked)
     echo "\e[1m",words_starting_with_message, letters,"\e[0m"
+  else:
     dont_print_wordlist=false
   stdout.write("\e[1m",enter_command_message,"\e[0m")
   var command=commandParser(readLine(stdin),command_index)
-  ## commands
+  ## Input handling
   # page flipping
   if command[0]=="page":
     #parse
@@ -123,33 +166,72 @@ while true:
       page-=1
     elif isDigit(command[1][0]):
       page=parseint(command[1])
-    #adust page
-    if page<0:
-      page+=(len(current_wordlist) div words_per_page)+1
-    elif (page+1)*words_per_page>len(current_wordlist):
-      page=page mod ((len(current_wordlist) div words_per_page)+1)
   #quit
   elif command[0]=="quit":
     break
   #help
   elif command[0]=="help":
+    echo command[1]
     printHelpMessage(language)
     dont_print_wordlist=true
   #add
   elif command[0]=="add":
     letters = letters & command[1].toLower().toRunes()
+    n_of_marked = 0
     let str_letters: string = $letters
     var new_wordlist: seq[Word]
     for word in current_wordlist:
       if len(word.word)>=len(str_letters) and word.word[0..len(str_letters)-1].toLower()==str_letters:
         new_wordlist.add(word)
+        if word.mark:
+          n_of_marked+=1
     main_wordlist.add(new_wordlist)
     page=0
   #back
   elif command[0]=="remove":
     letters=letters[0..^2]
     main_wordlist.delete(len(main_wordlist)-1)
+    n_of_marked=0
+    for word in current_wordlist:
+      if word.mark:
+        n_of_marked+=1
     page=0
+  #mark
+  elif command[0]=="mark": #TODO add marking by typing the entire word
+    if command[1]=="":
+      current_wordlist[mark_word].mark=true
+      marked_word_list.add(current_wordlist[mark_word])
+      n_of_marked+=1
+    elif isDigit(command[1][0]):
+      current_wordlist[parseInt(command[1])].mark=true
+      marked_word_list.add(current_wordlist[parseInt(command[1])])
+      n_of_marked+=1
+    else:
+      discard #TODO add an help message here
+      # dont_print_wordlist=true
+  #unmark
+  elif command[0]=="unmark":
+    if command[1]=="":
+      if len(marked_word_list)>0:
+        marked_word_list[^1].mark=false
+        marked_word_list.delete(len(marked_word_list)-1)
+        n_of_marked-=1
+      else:
+        discard #TODO add an help message here
+        # dont_print_wordlist=true
+    elif isDigit(command[1][0]):
+      marked_word_list[parseInt(command[1])].mark=false
+      marked_word_list.delete(parseInt(command[1]))
+      n_of_marked-=1
+    else:
+      discard #TODO add an help message here
+      # dont_print_wordlist=true
+  # else:
+  #   echo "Unknown command!"
+  #   printHelpMessage(language)
+  #   dont_print_wordlist = true
+
+    
 
 #Exiting
 if config["last_language"].getStr()!=language["language_name"].getStr():

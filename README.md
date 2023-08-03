@@ -76,6 +76,8 @@ You will than be asked to enter the first letter, no commands here. After you pr
 
 Once you have gotten the next letter from the "warden," enter `add l` (replace "l" with your letter). The dictionary will be sorted and you will see the new sorted list of words. If you entered a wrong letter by accident, you can use `remove` to remove the last letter.
 
+If you have used a word, but the riddeling was unsuccessful, you can use the `mark`/`m` command to mark (hide) the bottom word on the page you were on. Or you can call `mark <num>` with the number of the word to mark it (note: the number of the word might change). If you marked by mistake, you can use `unmark`/`um` command to unmark the last marked word.
+
 Once you have (hopefully) won the game, use `quit` to leave.
 
 You can use the `help` command to see the help message.
@@ -162,7 +164,10 @@ For German dicitonary:
 - [ ] add more languages
 - [ ] add more commands
 - [x] Capitalize German
-- [ ] add mark and unmark
-- [ ] mb. use regex to consider similar letter combinarions the same
+- [X] add mark and unmark
+- [ ] mb. use (regex) to consider similar letter combinarions the same/account for spelling mistakes
 - [ ] add input validation
+- [ ] mb. remove requency ranks if they aren't necessary
+- [ ] make a better help message
+- [ ] view marked words
     
