@@ -10,7 +10,8 @@
         "enter_first_letter": "Введите первою букву:",
         "words_starting_with": "Слова начиная с: ",
         "enter_command": "Введите команду:>",
-        "bad_command": "Что-то не так с командой."
+        "bad_command": "Что-то не так с командой.",
+        "no_words_remaining": "Слова закочились, введите 'убрать'"
     },
     "commands": {
         "quit": {

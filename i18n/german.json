@@ -4,13 +4,14 @@
     "messages": {
         "selected_language": "Gewählte Sprache: Deutsch",
         "available_dictionaries": "Verfügbare Wörterbücher:",
-        "enter_choice_number": "Eingebe Numer, (defualt 0):",
+        "enter_choice_number": "Eingebe Nummer, (defualt 0):",
         "available_commands": "Verfügbare Kommanden:",
         "loading_dictionary": "Wörterbuch wird geladen: ",
         "enter_first_letter": "Geben die erste Buchstabe ein:",
         "words_starting_with": "Wörter die starten mit: ",
         "enter_command": "Kommande:>",
-        "bad_command": "Etwas falsh mit der kommande..."
+        "bad_command": "Etwas falsh mit der kommande...",
+        "no_words_remaining": "Keine Wörter übrig, benutze die 'löshe' kommande."
     },
     "commands": {
         "quit": {

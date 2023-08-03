@@ -10,7 +10,8 @@
         "enter_first_letter": "Enter first letter:",
         "words_starting_with": "Words starting with: ",
         "enter_command": "Enter Command:>",
-        "bad_command": "Something wrong with the command."
+        "bad_command": "Something wrong with the command.",
+        "no_words_remainin": "No words remaining, use the 'remove' command"
     },
     "commands": {
         "quit": {

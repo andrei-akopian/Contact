@@ -172,7 +172,7 @@ while true:
   #help
   elif command[0]=="help":
     if command[1]=="bd":
-      echo language["messages"]["bad_command"]
+      echo language["messages"]["bad_command"].getStr()
     printHelpMessage(language)
     dont_print_wordlist=true
   #add
@@ -186,6 +186,8 @@ while true:
         new_wordlist.add(word)
         if word.mark:
           n_of_marked+=1
+    if len(new_wordlist)==0:
+      echo language["messages"]["no_words_remaining"].getStr()
     main_wordlist.add(new_wordlist)
     page=0
   #back
