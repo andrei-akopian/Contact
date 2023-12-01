@@ -111,7 +111,7 @@ proc printWordlist(wordlist: seq[Word],words_per_page:int=50,page_n: int = 0,n_o
   #print
   for i in countdown(len(page_content)-1,0,1):
     let word = page_content[i]
-    echo word.index, " - \e[1m", word.word.word, "\e[0m"
+    echo word.index, " - \e[32m", word.word.word, "\e[0m"
     for d in word.word.definitions:
       echo "  |" & d
   #return bottom element of the page
